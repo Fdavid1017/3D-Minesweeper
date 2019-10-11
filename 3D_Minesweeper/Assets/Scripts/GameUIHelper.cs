@@ -13,6 +13,8 @@ public class GameUIHelper : MonoBehaviour
     [SerializeField]
     MapGenerations mapGenerations;
 
+    [HideInInspector]
+    public static bool StopTime = false;
     public static int playTime = 0;
 
     // Start is called before the first frame update
@@ -43,8 +45,11 @@ public class GameUIHelper : MonoBehaviour
 
     void IncreasePlayTime()
     {
-        playTime++;
-        SetTimeCount(playTime.ToString());
-        Invoke("IncreasePlayTime", 1f);
+        if (!StopTime)
+        {
+            playTime++;
+            SetTimeCount(playTime.ToString());
+            Invoke("IncreasePlayTime", 1f);
+        }
     }
 }

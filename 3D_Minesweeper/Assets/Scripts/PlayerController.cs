@@ -118,7 +118,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             mapGenerator.tiles[x, z].GetComponent<Tile>().Revealed = true;
-            MapGenerations.IncreaseRevelaedTileCount(1);
+
+            if (mapGenerator.tiles[x, z].GetComponent<Tile>().NearbyCount != -1)
+            {
+                mapGenerator.IncreaseRevelaedTileCount(1);
+            }
         }
     }
 

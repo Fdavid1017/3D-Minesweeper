@@ -12,6 +12,7 @@ public class MapGenerations : MonoBehaviour
     static public Difficulity difficulity = Difficulity.Medium;
     static public bool LoadMap = false;
     static public MapData data = null;
+    public GameObject winUI;
     public GameObject baseTile;
     public GameObject frameTileInner;
     public GameObject frameTileOuter;
@@ -20,7 +21,6 @@ public class MapGenerations : MonoBehaviour
     public GameObject player;
     public GameObject water;
     public GameObject ground;
-    // public GameObject fenceEdge;
 
     [HideInInspector]
     public sbyte[,] map;
@@ -48,6 +48,7 @@ public class MapGenerations : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         tilesParent = new GameObject();
         tilesParent.name = "Tiles Parent";
         rocksParent = new GameObject();
@@ -57,6 +58,7 @@ public class MapGenerations : MonoBehaviour
         fenceParent = new GameObject();
         fenceParent.name = "Fence Parent";
 
+        revealedTilesCount = 0;
         int smallRocksCount = 0;
 
         if (LoadMap)
@@ -83,11 +85,6 @@ public class MapGenerations : MonoBehaviour
                     SpawnTile(i, j, data.revealedMap[i, j], data.flaggedMap[i, j]);
                 }
             }
-
-            //   Debug.Log(data.revealedMap[0, 0] == null ? "NULL" : "NOT NULL " + data.revealedMap[0, 0]);
-            //   Debug.Log(data.flaggedMap == null ? "NULL" : "NOT NULL " + data.flaggedMap.ToString());
-
-            //  Debug.Log(data.revealedMap[xSize, zSize].ToString() + data.flaggedMap[xSize, zSize].ToString());
         }
         else
         {
@@ -215,7 +212,9 @@ public class MapGenerations : MonoBehaviour
                 if (i >= 0 && i < xSize && j >= 0 && j < zSize && (i != cordX || j != cordY) && !tiles[i, j].GetComponent<Tile>().Revealed)
                 {
                     tiles[i, j].GetComponent<Tile>().Revealed = true;
-                    MapGenerations.IncreaseRevelaedTileCount(1);
+
+                    IncreaseRevelaedTileCount(1);
+
                     if (tiles[i, j].GetComponent<Tile>().NearbyCount == 0)
                     {
                         RevealNearbyTiles(i, j);
@@ -239,13 +238,13 @@ public class MapGenerations : MonoBehaviour
         Debug.Log(outS);
     }
 
-    public static void IncreaseRevelaedTileCount(int increaseBy)
+    public void IncreaseRevelaedTileCount(int increaseBy)
     {
         revealedTilesCount += increaseBy;
         if (revealedTilesCount == (tileCount - bombCount))
         {
-            Debug.Log("WIN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-           // MenuUIHelper.highscoresList.Add(new Highscore("a", GameUIHelper.playTime));
+            winUI.SetActive(true);
+            GameUIHelper.StopTime = true;
         }
     }
 
