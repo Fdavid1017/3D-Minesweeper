@@ -348,11 +348,11 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 2405110780477629852}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 99282224116699603}
         m_MethodName: IncreaseSlider
         m_Mode: 2
         m_Arguments:
@@ -474,11 +474,11 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1886605740602849479}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 99282224116699603}
         m_MethodName: DecreaseSlider
         m_Mode: 2
         m_Arguments:
@@ -766,6 +766,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1283613360401274484}
   - component: {fileID: 1283613360401274487}
+  - component: {fileID: 99282224116699603}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -847,7 +848,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 99282224116699603}
         m_MethodName: ChangeSliderTextValue
         m_Mode: 2
         m_Arguments:
@@ -860,6 +861,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &99282224116699603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283613360401274485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fba9d3dc2b1456429df28e9c58f8a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7714257341880700912
 GameObject:
   m_ObjectHideFlags: 0

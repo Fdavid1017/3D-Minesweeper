@@ -12,6 +12,8 @@ public class MenuUIHelper : MonoBehaviour
     [SerializeField]
     GameObject mainMenu;
     [SerializeField]
+    GameObject settingsUI;
+    [SerializeField]
     GameObject infoPanel;
     [SerializeField]
     TextMeshProUGUI infoText;
@@ -38,10 +40,6 @@ public class MenuUIHelper : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-       
-    }
 
     public void PlayAgain()
     {
@@ -74,7 +72,8 @@ public class MenuUIHelper : MonoBehaviour
 
     public void Settings()
     {
-        Debug.Log("Settings");
+        mainMenu.SetActive(false);
+        settingsUI.SetActive(true);
     }
 
     public void Quit()
@@ -98,22 +97,6 @@ public class MenuUIHelper : MonoBehaviour
     public void ChangeInfoText(string text)
     {
         infoText.text = text;
-    }
-
-    public void ChangeSliderTextValue(GameObject slider)
-    {
-        //text.text = slider.value.ToString();
-        slider.transform.GetChild(2).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = slider.GetComponent<Slider>().value.ToString();
-    }
-
-    public void IncreaseSlider(Slider slider)
-    {
-        slider.value++;
-    }
-
-    public void DecreaseSlider(Slider slider)
-    {
-        slider.value--;
     }
 
     void ChangeDifficulity()
