@@ -10,6 +10,18 @@ public class RadioButtonController : MonoBehaviour
     public Sprite offImage;
     public bool on = false;
 
+    private void Start()
+    {
+        if (on)
+        {
+            imageEditor.sprite = onImage;
+        }
+        else
+        {
+            imageEditor.sprite = offImage;
+        }
+    }
+
     public void ChangeState()
     {
         on = !on;
