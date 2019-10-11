@@ -12,6 +12,8 @@ public class GameUIHelper : MonoBehaviour
     TextMeshProUGUI flagCount;
     [SerializeField]
     MapGenerations mapGenerations;
+    [SerializeField]
+    GameObject pauseUI;
 
     [HideInInspector]
     public static bool StopTime = false;
@@ -23,13 +25,12 @@ public class GameUIHelper : MonoBehaviour
         Invoke("IncreasePlayTime", 1f);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SaveSystem.SaveMap(mapGenerations);
-            SceneManager.LoadScene("MainMenu");
+            pauseUI.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
