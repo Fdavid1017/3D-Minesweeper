@@ -29,8 +29,6 @@ public class MenuUIHelper : MonoBehaviour
     int dif = 0;
     MapData mapData;
 
-    public static List<Highscore> highscoresList = new List<Highscore>();
-
     private void Start()
     {
         mapData = SaveSystem.LoadMap();
@@ -42,29 +40,7 @@ public class MenuUIHelper : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            highscoresList.Add(new Highscore(Random.Range(1, 50).ToString(), Random.Range(1, 50)));
-            SaveSystem.SaveHighScore(highscoresList);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            List<Highscore> hs = SaveSystem.LoadHighScores();
-            string g = "";
-            foreach (Highscore item in hs)
-            {
-                g += item.name + " - " + item.time + "\n";
-            }
-            Debug.Log(g);
-
-            GlobalHelper.OrderHighscoresAsc(ref hs);
-            g = "";
-            foreach (Highscore item in hs)
-            {
-                g += item.name + " - " + item.time + "\n";
-            }
-            Debug.Log(g);
-        }
+       
     }
 
     public void PlayAgain()
