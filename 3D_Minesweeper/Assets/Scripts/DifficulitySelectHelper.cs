@@ -9,6 +9,7 @@ public class DifficulitySelectHelper : MonoBehaviour
     public Slider heightSlider;
     public Slider widthSlider;
     public Slider bombsSlider;
+    public GameObject mainMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,10 @@ public class DifficulitySelectHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            DiffToMain();
+        }
     }
 
     public void EasyStart()
@@ -64,5 +68,11 @@ public class DifficulitySelectHelper : MonoBehaviour
     {
         MapGenerations.LoadMap = false;
         SceneManager.LoadScene("SampleScene");
+    }
+
+    void DiffToMain()
+    {
+        this.gameObject.SetActive(false);
+        mainMenu.SetActive(true);
     }
 }
