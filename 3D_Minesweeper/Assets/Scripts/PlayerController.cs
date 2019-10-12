@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class PlayerController : MonoBehaviour
 {
     public GameObject flagPref;
     public Animator anim;
     public GameUIHelper gameUIHelper;
+    public AudioClip dirt;
+    public AudioClip stone;
+    public AudioSource audio;
 
     Directions dir = Directions.Still;
     int flagCount;
@@ -152,5 +156,23 @@ public class PlayerController : MonoBehaviour
             previousLocation.x = x;
             previousLocation.y = z;
         }
+    }
+
+    public void StepSound()
+    {
+        int x = Mathf.RoundToInt(transform.position.x);
+        int z = Mathf.RoundToInt(transform.position.z);
+        bool grass = mapGenerator.tiles[x, z].GetComponent<Tile>().Revealed;
+
+        if (grass)
+        {
+            audio.clip = dirt;
+        }
+        else
+        {
+            audio.clip = stone;
+        }
+
+        audio.Play();
     }
 }
