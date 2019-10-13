@@ -10,8 +10,10 @@ public class SettingsUiHelper : MonoBehaviour
     public GameObject mainMenuUi;
     public GameObject infoPanel;
     public TextMeshProUGUI graphicsPickerText;
-    public AudioMixer audio;
+    public AudioMixer fxaudio;
+    public AudioMixer musicAudio;
     public TextMeshProUGUI volumeSliderLabelText;
+    public TextMeshProUGUI fxVolumeSliderLabelText;
     public RadioButtonController fullscreenButton;
     public TextMeshProUGUI resolutionText;
 
@@ -29,8 +31,6 @@ public class SettingsUiHelper : MonoBehaviour
         for (int i = 0; i < resolutions.Length; i++)
         {
             resolutionsString.Add(resolutions[i].width.ToString() + " x " + resolutions[i].height.ToString());
-
-            Debug.Log(resolutions[i].width.ToString() + " x " + resolutions[i].height.ToString());
 
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
@@ -131,13 +131,27 @@ public class SettingsUiHelper : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        audio.SetFloat("volume", volume);
+        musicAudio.SetFloat("volume", volume);
+        float a;
+        musicAudio.GetFloat("volume", out a);
+        Debug.Log(musicAudio.name + "\t" + a);
         VolumeSliderShowValue(volume);
+    }
+
+    public void SetFXVolume(float volume)
+    {
+        fxaudio.SetFloat("volume", volume);
+        FXVolumeSliderShowValue(volume);
     }
 
     void VolumeSliderShowValue(float value)
     {
         volumeSliderLabelText.text = Mathf.RoundToInt(Remap(value, -80, 0, 0, 100)).ToString();
+    }
+
+    void FXVolumeSliderShowValue(float value)
+    {
+        fxVolumeSliderLabelText.text = Mathf.RoundToInt(Remap(value, -80, 0, 0, 100)).ToString();
     }
 
     float Remap(float value, float from1, float to1, float from2, float to2)
