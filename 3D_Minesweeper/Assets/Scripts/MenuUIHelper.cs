@@ -16,15 +16,15 @@ public class MenuUIHelper : MonoBehaviour
     [SerializeField]
     GameObject infoPanel;
     [SerializeField]
-    TextMeshProUGUI infoText;
+    TextMeshProUGUI infoWidth;
     [SerializeField]
-    GameObject widthSlider;
+    TextMeshProUGUI infoHeight;
     [SerializeField]
-    GameObject heightSlider;
+    TextMeshProUGUI infoBombCount;
     [SerializeField]
-    GameObject bombCountSlider;
+    TextMeshProUGUI infoRevealed;
     [SerializeField]
-    GameObject mapInfoPanel;
+    TextMeshProUGUI infoMore;
     [SerializeField]
     Button loadButton;
 
@@ -84,8 +84,15 @@ public class MenuUIHelper : MonoBehaviour
 
     public void ShowLoadInfo()
     {
-        ChangeInfoText(mapData == null ? "No save file found!" : mapData.mapX + " x " + mapData.mapZ + "\n" + mapData.bombCount + " Bomb\n"
-            + mapData.revealedCount + " Revealed");
+        if (mapData == null)
+        {
+            ChangeInfoText("", "", "", "", "No save file found!");
+        }
+        else
+        {
+            ChangeInfoText(mapData.mapX.ToString(), mapData.mapZ.ToString(), mapData.bombCount.ToString(), mapData.revealedCount.ToString(), ""); ;
+        }
+
         infoPanel.SetActive(true);
     }
 
@@ -94,8 +101,13 @@ public class MenuUIHelper : MonoBehaviour
         infoPanel.SetActive(false);
     }
 
-    public void ChangeInfoText(string text)
+    public void ChangeInfoText(string width, string height, string bombCount, string revealed, string moreInfo)
     {
-        infoText.text = text;
+        infoWidth.text = width;
+        infoHeight.text = height;
+        infoBombCount.text = bombCount;
+        infoRevealed.text = revealed;
+        infoMore.text = moreInfo
+            ;
     }
 }
