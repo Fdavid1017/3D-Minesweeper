@@ -212,7 +212,8 @@ public class MapGenerations : MonoBehaviour
         {
             for (int j = cordY - 1; j <= cordY + 1; j++)
             {
-                if (i >= 0 && i < xSize && j >= 0 && j < zSize && (i != cordX || j != cordY) && !tiles[i, j].GetComponent<Tile>().Revealed)
+                if (i >= 0 && i < xSize && j >= 0 && j < zSize && (i != cordX || j != cordY) && !tiles[i, j].GetComponent<Tile>().Revealed &&
+                    !tiles[i, j].GetComponent<Tile>().isFlagged)
                 {
                     tiles[i, j].GetComponent<Tile>().Revealed = true;
 
