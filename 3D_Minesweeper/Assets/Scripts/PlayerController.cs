@@ -96,16 +96,18 @@ public class PlayerController : MonoBehaviour
     {
         int x = Mathf.RoundToInt(transform.position.x);
         int z = Mathf.RoundToInt(transform.position.z);
-        Transform parent = mapGenerator.tiles[x, z].transform;
+        //   Transform parent = mapGenerator.tiles[x, z].transform;
         if (add)
         {
-            GameObject flag = Instantiate(flagPref, parent);
-            flag.transform.localPosition = flagSpawnLocalPosition;
+            mapGenerator.tiles[x, z].GetComponent<Tile>().FlagModell(true);
+            /*   GameObject flag = Instantiate(flagPref, parent);
+               flag.transform.localPosition = flagSpawnLocalPosition;*/
         }
         else
         {
-            GameObject flag = parent.GetChild(2).gameObject;
-            Destroy(flag);
+            mapGenerator.tiles[x, z].GetComponent<Tile>().FlagModell(false);
+            /*   GameObject flag = parent.GetChild(2).gameObject;
+               Destroy(flag);*/
         }
     }
 

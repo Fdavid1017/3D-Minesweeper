@@ -97,6 +97,8 @@ MonoBehaviour:
   grassMaterial: {fileID: 2100000, guid: 507377e38b0dba941bacda0fcc6c3605, type: 2}
   grassTile: {fileID: 47375969309408587}
   dissolveSpeed: 2
+  flagPref: {fileID: 7434346590466871421, guid: 42574e0b51e5c224b80b0717145cd53b,
+    type: 3}
   diedScreenUi: {fileID: 0}
 --- !u!65 &829969445373070523
 BoxCollider:

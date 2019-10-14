@@ -81,7 +81,6 @@ public class MapGenerations : MonoBehaviour
             {
                 for (int j = 0; j < zSize; j++)
                 {
-                    Debug.Log(map[i, j]);
                     SpawnTile(i, j, data.revealedMap[i, j], data.flaggedMap[i, j]);
                 }
             }
@@ -177,7 +176,11 @@ public class MapGenerations : MonoBehaviour
         tiles[x, z].GetComponent<Tile>().NearbyCount = map[x, z];
         tiles[x, z].GetComponent<Tile>().diedScreenUi = diedUI;
         tiles[x, z].GetComponent<Tile>().Revealed = revealed;
-        tiles[x, z].GetComponent<Tile>().isFlagged = flagged;
+        if (flagged)
+        {
+            tiles[x, z].GetComponent<Tile>().isFlagged = flagged;
+            tiles[x, z].GetComponent<Tile>().FlagModell(true);
+        }
     }
 
     sbyte CheckSurroundingBombCount(int cordX, int cordY)

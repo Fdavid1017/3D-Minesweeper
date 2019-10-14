@@ -20,14 +20,16 @@ public class Tile : MonoBehaviour
     sbyte nearbyCount = 0;
     bool flagged = false;
     bool revealed = false;
+    Vector3 flagSpawnLocalPosition = new Vector3(0f, 1f, 0f);
 
     public GameObject diedScreenUi;
+    public GameObject flagPref;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        textMP.enabled = false;
+        textMP.enabled = revealed ? true : false;
         grassTileSize = grassTile.transform.localScale.x;
     }
 
@@ -128,6 +130,21 @@ public class Tile : MonoBehaviour
                     Destroy(this.gameObject);
                 }
             }
+        }
+    }
+
+
+    public void FlagModell(bool place)
+    {
+        if (place)
+        {
+            GameObject flag = Instantiate(flagPref, transform);
+            flag.transform.localPosition = flagSpawnLocalPosition;
+        }
+        else
+        {
+            GameObject flag = transform.GetChild(2).gameObject;
+            Destroy(flag);
         }
     }
 }
