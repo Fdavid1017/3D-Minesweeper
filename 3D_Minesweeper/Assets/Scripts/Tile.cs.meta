@@ -3,7 +3,13 @@ guid: 7413ca3f2ccbfc641a5afc2422568c57
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - textMP: {instanceID: 0}
+  - grassMaterial: {instanceID: 0}
+  - grassTile: {instanceID: 0}
+  - diedScreenUi: {instanceID: 0}
+  - flagPref: {fileID: 7434346590466871421, guid: 42574e0b51e5c224b80b0717145cd53b,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

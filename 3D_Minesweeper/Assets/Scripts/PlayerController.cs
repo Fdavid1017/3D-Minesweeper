@@ -5,23 +5,18 @@ using System.IO;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject flagPref;
     public Animator anim;
     public GameUIHelper gameUIHelper;
     public AudioClip dirt;
     public AudioClip stone;
     public AudioSource audio;
 
-    Directions dir = Directions.Still;
     int flagCount;
     MapGenerations mapGenerator;
     private Vector3 moveDirection = Vector3.zero;
     Vector2 previousLocation = new Vector2();
-    Vector3 flagSpawnLocalPosition = new Vector3(0f, 1f, 0f);
-    enum Directions
-    {
-        North, South, West, East, Still
-    }
+    Vector3 previousLocationRAW = new Vector3();
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +24,7 @@ public class PlayerController : MonoBehaviour
         mapGenerator = GameObject.Find("TileMap").GetComponent<MapGenerations>();
         previousLocation.x = Mathf.RoundToInt(transform.position.x);
         previousLocation.y = Mathf.RoundToInt(transform.position.z);
+        previousLocationRAW = transform.position;
         flagCount = MapGenerations.bombCount;
         gameUIHelper.SetFlagCount(flagCount.ToString());
     }
@@ -162,19 +158,22 @@ public class PlayerController : MonoBehaviour
 
     public void StepSound()
     {
-        int x = Mathf.RoundToInt(transform.position.x);
-        int z = Mathf.RoundToInt(transform.position.z);
-        bool grass = mapGenerator.tiles[x, z].GetComponent<Tile>().Revealed;
-
-        if (grass)
+        if (transform.position != previousLocationRAW)
         {
-            audio.clip = dirt;
-        }
-        else
-        {
-            audio.clip = stone;
-        }
 
-        audio.Play();
+            int x = Mathf.RoundToInt(transform.position.x);
+            int z = Mathf.RoundToInt(transform.position.z);
+            audio.clip = null;
+            if (mapGenerator.tiles[x, z].GetComponent<Tile>().Revealed)
+            {
+                audio.clip = dirt;
+            }
+            else
+            {
+                audio.clip = stone;
+            }
+            audio.Play();
+            previousLocationRAW = transform.position;
+        }
     }
 }
