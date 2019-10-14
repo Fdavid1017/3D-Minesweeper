@@ -22,6 +22,8 @@ public class GameUIHelper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playTime = 0;
+        StopTime = false;
         Invoke("IncreasePlayTime", 1f);
     }
 

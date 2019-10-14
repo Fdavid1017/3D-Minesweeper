@@ -127,6 +127,7 @@ public class Tile : MonoBehaviour
                     GameObject.FindGameObjectWithTag("LookFree").SetActive(false);
 
                     diedScreenUi.SetActive(true);
+                    GameUIHelper.StopTime = true;
                     Destroy(this.gameObject);
                 }
             }
