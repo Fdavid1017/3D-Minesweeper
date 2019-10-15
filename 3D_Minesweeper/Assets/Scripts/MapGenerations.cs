@@ -38,7 +38,7 @@ public class MapGenerations : MonoBehaviour
     [SerializeField]
     List<GameObject> smallRocks = new List<GameObject>();
 
-    static int revealedTilesCount = 0;
+    public static int revealedTilesCount = 0;
     static int tileCount;
     GameObject tilesParent;
     GameObject rocksParent;
@@ -61,13 +61,9 @@ public class MapGenerations : MonoBehaviour
         revealedTilesCount = 0;
         int smallRocksCount = 0;
 
-        if (LoadMap)
+        if (LoadMap && data.revealedCount > 0 && data != null)
         {
-            if (data == null)
-            {
-                Debug.LogError("No data assigned to be loaded!!!");
-                return;
-            }
+
 
             difficulity = data.difficulity;
             xSize = data.mapX;
@@ -76,6 +72,7 @@ public class MapGenerations : MonoBehaviour
             map = data.numbersMap;
             tileCount = xSize * zSize;
             tiles = new GameObject[xSize, zSize];
+            revealedTilesCount = data.revealedCount;
 
             for (int i = 0; i < xSize; i++)
             {
@@ -113,9 +110,11 @@ public class MapGenerations : MonoBehaviour
             map = new sbyte[xSize, zSize];
             tiles = new GameObject[xSize, zSize];
             tileCount = xSize * zSize;
+            revealedTilesCount = 0;
 
-            GenerateBombs();
-            GenerateNumbers();
+            // GenerateBombs();
+            // GenerateNumbers();
+            SpawnMap();
         }
 
         SpawnSmallRocks(smallRocksCount);
@@ -133,23 +132,63 @@ public class MapGenerations : MonoBehaviour
         ground.transform.position = center;
     }
 
-    void GenerateBombs()
+    void SpawnMap()
+    {
+        for (int i = 0; i < xSize; i++)
+        {
+            for (int j = 0; j < zSize; j++)
+            {
+                SpawnTile(i, j, false, false);
+            }
+        }
+    }
+
+    public void GenerateBombs(int currentX, int currentZ)
     {
         for (int i = 0; i < bombCount; i++)
         {
             sbyte x;
             sbyte z;
+            bool gen = true;
             do
             {
                 x = (sbyte)Mathf.RoundToInt(UnityEngine.Random.Range(0, xSize));
                 z = (sbyte)Mathf.RoundToInt(UnityEngine.Random.Range(0, zSize));
+                bool nearby = false;
 
-                if (map[x, z] != -1)
+                for (int l = currentX - 1; l <= currentX + 1 && !nearby; l++)
                 {
-                    map[x, z] = -1;
+                    for (int j = currentZ - 1; j <= currentZ + 1 && !nearby; j++)
+                    {
+                        if (l >= 0 && l < xSize && j >= 0 && j < zSize && (l != x || j != z))
+                        {
+                            if (x == l || z == j)
+                            {
+                                nearby = true;
+                            }
+                        }
+                    }
                 }
-            } while (map[x, z] != -1);
+
+                if (!nearby)
+                {
+                    if (map[x, z] != -1)
+                    {
+                        map[x, z] = -1;
+                        gen = false;
+                    }
+                    else
+                    {
+                        gen = true;
+                    }
+                }
+                else
+                {
+                    gen = true;
+                }
+            } while (gen);
         }
+        GenerateNumbers();
     }
 
     void GenerateNumbers()
@@ -162,7 +201,7 @@ public class MapGenerations : MonoBehaviour
                 {
                     map[x, z] = CheckSurroundingBombCount(x, z);
                 }
-                SpawnTile(x, z, false, false);
+                tiles[x, z].GetComponent<Tile>().NearbyCount = map[x, z];
             }
         }
     }
