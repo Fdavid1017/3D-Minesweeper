@@ -16,6 +16,7 @@ public class SettingsUiHelper : MonoBehaviour
     public TextMeshProUGUI fxVolumeSliderLabelText;
     public RadioButtonController fullscreenButton;
     public TextMeshProUGUI resolutionText;
+    public RadioButtonController tipsButton;
 
     public static bool showTips = true;
 
@@ -43,6 +44,7 @@ public class SettingsUiHelper : MonoBehaviour
 
         ChangeGraphicsText(QualitySettings.names[QualitySettings.GetQualityLevel()]);
         volumeSliderLabelText.text = "100";
+        tipsButton.SetState(showTips);
     }
 
     public void ApplyResolution()
@@ -164,5 +166,10 @@ public class SettingsUiHelper : MonoBehaviour
     public void SetFullscreen()
     {
         Screen.fullScreen = fullscreenButton.on;
+    }
+
+    public void SetTips()
+    {
+        showTips = tipsButton.on;
     }
 }

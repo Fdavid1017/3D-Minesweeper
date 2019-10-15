@@ -44,4 +44,17 @@ public class RadioButtonController : MonoBehaviour
     {
         imageEditor.color = Color.white;
     }
+
+    public void SetState(bool newState)
+    {
+        on = newState;
+        if (on)
+        {
+            imageEditor.sprite = onImage;
+        }
+        else
+        {
+            imageEditor.sprite = offImage;
+        }
+    }
 }

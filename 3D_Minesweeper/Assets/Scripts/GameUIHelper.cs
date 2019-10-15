@@ -88,6 +88,7 @@ public class GameUIHelper : MonoBehaviour
 
     public void TipsPanelShowHide(bool show)
     {
+        Debug.Log(SettingsUiHelper.showTips);
         if (SettingsUiHelper.showTips)
         {
             tipsPanel.SetActive(show);
@@ -100,6 +101,11 @@ public class GameUIHelper : MonoBehaviour
             {
                 CancelInvoke();
             }
+        }
+        else
+        {
+            CancelInvoke();
+            tipsPanel.SetActive(false);
         }
     }
 
