@@ -17,6 +17,8 @@ public class SettingsUiHelper : MonoBehaviour
     public RadioButtonController fullscreenButton;
     public TextMeshProUGUI resolutionText;
 
+    public static bool showTips = true;
+
     sbyte graphicPosition = 2;
     int resolutionIndex = 0;
     Resolution[] resolutions;

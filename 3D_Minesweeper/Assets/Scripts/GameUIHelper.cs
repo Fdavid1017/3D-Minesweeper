@@ -14,10 +14,16 @@ public class GameUIHelper : MonoBehaviour
     MapGenerations mapGenerations;
     [SerializeField]
     GameObject pauseUI;
+    [SerializeField]
+    GameObject tipsPanel;
+    [SerializeField]
+    TextMeshProUGUI tipsText;
 
     [HideInInspector]
     public static bool StopTime = false;
     public static int playTime = 0;
+
+    public bool showTips = true;
 
     // Start is called before the first frame update
     void Start()
@@ -25,14 +31,38 @@ public class GameUIHelper : MonoBehaviour
         playTime = 0;
         StopTime = false;
         Invoke("IncreasePlayTime", 1f);
+
+        SetTip("Use WASD or the arow keys to move.\nPress Q to reveal tile.\nPress E to place/remove flag.");
+        TipsPanelShowHide(true);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseUI.SetActive(true);
-            Time.timeScale = 0;
+            if (pauseUI.activeSelf)
+            {
+                pauseUI.GetComponent<PauseUIHelper>().Resume();
+            }
+            else
+            {
+                pauseUI.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
+
+        if (tipsPanel.activeSelf)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                TipsPanelShowHide(false);
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                TipsPanelShowHide(false);
+                SettingsUiHelper.showTips = false;
+
+            }
         }
     }
 
@@ -53,6 +83,36 @@ public class GameUIHelper : MonoBehaviour
             playTime++;
             SetTimeCount(playTime.ToString());
             Invoke("IncreasePlayTime", 1f);
+        }
+    }
+
+    public void TipsPanelShowHide(bool show)
+    {
+        if (SettingsUiHelper.showTips)
+        {
+            tipsPanel.SetActive(show);
+
+            if (show)
+            {
+                Invoke("HideTipps", 10);
+            }
+            else
+            {
+                CancelInvoke();
+            }
+        }
+    }
+
+    public void SetTip(string text)
+    {
+        tipsText.text = text;
+    }
+
+    void HideTipps()
+    {
+        if (tipsPanel.activeSelf)
+        {
+            tipsPanel.SetActive(false);
         }
     }
 }

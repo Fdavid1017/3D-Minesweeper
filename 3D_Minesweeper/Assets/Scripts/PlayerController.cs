@@ -51,9 +51,17 @@ public class PlayerController : MonoBehaviour
                     }
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Q) && !mapGenerator.tiles[x, z].GetComponent<Tile>().isFlagged && !mapGenerator.tiles[x, z].GetComponent<Tile>().Revealed)
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                RevealTile(x, z);
+                if (mapGenerator.tiles[x, z].GetComponent<Tile>().isFlagged)
+                {
+                    gameUIHelper.SetTip("You cannot reveal tiles with flag");
+                    gameUIHelper.TipsPanelShowHide(true);
+                }
+                else if (!mapGenerator.tiles[x, z].GetComponent<Tile>().Revealed)
+                {
+                    RevealTile(x, z);
+                }
             }
         }
 
