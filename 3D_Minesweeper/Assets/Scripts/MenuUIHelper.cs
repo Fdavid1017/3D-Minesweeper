@@ -46,7 +46,7 @@ public class MenuUIHelper : MonoBehaviour
     public void PlayAgain()
     {
         MapGenerations.LoadMap = false;
-        sceneLoader.LoadLevel("SceneManager.GetActiveScene().name");
+        sceneLoader.LoadLevel("SampleScene");
     }
 
     public void MainMenu()

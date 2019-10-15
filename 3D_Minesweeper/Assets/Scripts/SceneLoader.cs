@@ -8,7 +8,15 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLevel(string sceneName)
     {
-        StartCoroutine(LoadAsynchronously(sceneName));
+      /*  Debug.Log(sceneName);
+        if (sceneName != null && sceneName == "")
+        {*/
+            StartCoroutine(LoadAsynchronously(sceneName));
+      /*  }
+        else
+        {
+            Debug.LogError("Scene name must be assigned!!!");
+        }*/
     }
 
     IEnumerator LoadAsynchronously(string sceneName)
@@ -17,7 +25,7 @@ public class SceneLoader : MonoBehaviour
 
         while (!operation.isDone)
         {
-            loadingScreen.SetActive(true);
+            // loadingScreen.SetActive(true);
             yield return null;
         }
     }
