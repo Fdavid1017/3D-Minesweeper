@@ -6,9 +6,13 @@ using TMPro;
 
 public class SliderController : MonoBehaviour
 {
+    public bool autoShowStartValue = true;
     private void Start()
     {
-        transform.GetChild(2).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = gameObject.GetComponent<Slider>().value.ToString();
+        if (autoShowStartValue)
+        {
+            transform.GetChild(2).GetChild(0).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = gameObject.GetComponent<Slider>().value.ToString();
+        }
     }
 
     public void ChangeSliderTextValue(GameObject slider)
@@ -24,5 +28,5 @@ public class SliderController : MonoBehaviour
     public void DecreaseSlider(Slider slider)
     {
         slider.value--;
-    }    
+    }
 }

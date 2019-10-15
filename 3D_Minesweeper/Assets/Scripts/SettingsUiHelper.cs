@@ -56,10 +56,10 @@ public class SettingsUiHelper : MonoBehaviour
             ChangeGraphicsText(QualitySettings.names[QualitySettings.GetQualityLevel()]);
             float temp = 0f;
             musicAudio.GetFloat("volume", out temp);
-            volumeSliderLabelText.text = Mathf.RoundToInt(Remap(temp, -80, 0, 0, 100)).ToString();
+            VolumeSliderShowValue(temp);
             volumeSlider.value = temp;
             fxaudio.GetFloat("volume", out temp);
-            fxVolumeSliderLabelText.text = Mathf.RoundToInt(Remap(temp, -80, 0, 0, 100)).ToString();
+            FXVolumeSliderShowValue(temp);
             sfxSlider.value = temp;
             tipsButton.SetState(showTips);
         }

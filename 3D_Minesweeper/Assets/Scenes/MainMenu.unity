@@ -2575,6 +2575,11 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 458585154}
+    - target: {fileID: 99282224116699603, guid: 7e480c90dd236d84b93fd7940b717257,
+        type: 3}
+      propertyPath: autoShowStartValue
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e480c90dd236d84b93fd7940b717257, type: 3}
 --- !u!224 &458585153 stripped
@@ -7029,6 +7034,11 @@ PrefabInstance:
       propertyPath: m_TargetGraphic
       value: 
       objectReference: {fileID: 1351996648}
+    - target: {fileID: 99282224116699603, guid: 7e480c90dd236d84b93fd7940b717257,
+        type: 3}
+      propertyPath: autoShowStartValue
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e480c90dd236d84b93fd7940b717257, type: 3}
 --- !u!224 &1351996647 stripped
