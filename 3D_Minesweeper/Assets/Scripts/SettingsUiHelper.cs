@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Audio;
+using System.IO;
 
 public class SettingsUiHelper : MonoBehaviour
 {
@@ -17,8 +18,11 @@ public class SettingsUiHelper : MonoBehaviour
     public RadioButtonController fullscreenButton;
     public TextMeshProUGUI resolutionText;
     public RadioButtonController tipsButton;
+    public Slider volumeSlider;
+    public Slider sfxSlider;
 
     public static bool showTips = true;
+    static public bool load = false;
 
     [HideInInspector]
     public sbyte graphicPosition = 2;
@@ -30,27 +34,10 @@ public class SettingsUiHelper : MonoBehaviour
     bool saved = true;
 
 
-    private void Awake()
-    {
-        SettingsData data = SaveSystem.LoadSettings();
-        if (data != null)
-        {
-            Screen.SetResolution(data.resolutionWidth, data.resolutionHeight, data.fullScreen);
-            fullscreenButton.SetState(data.fullScreen);
-            QualitySettings.SetQualityLevel(data.graphicsQuality);
-            musicAudio.SetFloat("volume", data.musicVolume);
-            fxaudio.SetFloat("volume", data.sfxVolume);
-        }
-        else
-        {
-            Debug.LogError("Settings file not setted");
-        }
-    }
-
     private void Start()
     {
+
         resolutions = Screen.resolutions;
-        ChangeResolutionText(Screen.currentResolution.width.ToString() + " x " + Screen.currentResolution.height.ToString());
 
         for (int i = 0; i < resolutions.Length; i++)
         {
@@ -63,13 +50,19 @@ public class SettingsUiHelper : MonoBehaviour
             }
         }
 
-        ChangeGraphicsText(QualitySettings.names[QualitySettings.GetQualityLevel()]);
-        float temp = 0f;
-        musicAudio.GetFloat("volume", out temp);
-        volumeSliderLabelText.text = Mathf.RoundToInt(temp).ToString();
-        fxaudio.GetFloat("volume", out temp);
-        fxVolumeSliderLabelText.text = Mathf.RoundToInt(temp).ToString();
-        tipsButton.SetState(showTips);
+        if (!File.Exists(SaveSystem.settingsPath))
+        {
+            ChangeResolutionText(Screen.currentResolution.width.ToString() + " x " + Screen.currentResolution.height.ToString());
+            ChangeGraphicsText(QualitySettings.names[QualitySettings.GetQualityLevel()]);
+            float temp = 0f;
+            musicAudio.GetFloat("volume", out temp);
+            volumeSliderLabelText.text = Mathf.RoundToInt(Remap(temp, -80, 0, 0, 100)).ToString();
+            volumeSlider.value = temp;
+            fxaudio.GetFloat("volume", out temp);
+            fxVolumeSliderLabelText.text = Mathf.RoundToInt(Remap(temp, -80, 0, 0, 100)).ToString();
+            sfxSlider.value = temp;
+            tipsButton.SetState(showTips);
+        }
     }
 
     public void ApplyResolution()
@@ -176,17 +169,17 @@ public class SettingsUiHelper : MonoBehaviour
         FXVolumeSliderShowValue(volume);
     }
 
-    void VolumeSliderShowValue(float value)
+    public void VolumeSliderShowValue(float value)
     {
         volumeSliderLabelText.text = Mathf.RoundToInt(Remap(value, -80, 0, 0, 100)).ToString();
     }
 
-    void FXVolumeSliderShowValue(float value)
+    public void FXVolumeSliderShowValue(float value)
     {
         fxVolumeSliderLabelText.text = Mathf.RoundToInt(Remap(value, -80, 0, 0, 100)).ToString();
     }
 
-    float Remap(float value, float from1, float to1, float from2, float to2)
+    public static float Remap(float value, float from1, float to1, float from2, float to2)
     {
         return (value - from1) / (to1 - from1) * (to2 - from2) + from2;
     }

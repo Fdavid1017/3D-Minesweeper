@@ -27,12 +27,14 @@ public class SettingsData
 
     public SettingsData(SettingsUiHelper settings)
     {
-        this.resolutionHeight = Screen.height;
-        this.resolutionWidth = Screen.width;
+        this.resolutionHeight = Screen.currentResolution.height;
+        this.resolutionWidth = Screen.currentResolution.width;
         this.fullScreen = Screen.fullScreen;
         this.graphicsQuality = QualitySettings.GetQualityLevel();
         settings.musicAudio.GetFloat("volume", out this.musicVolume);
         settings.fxaudio.GetFloat("volume", out this.sfxVolume);
         this.showTips = SettingsUiHelper.showTips;
+
+        Debug.Log(resolutionWidth + " x " + resolutionHeight + " " + fullScreen);
     }
 }

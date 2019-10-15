@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
     static string mapPath = Application.persistentDataPath + "/map.mms";
-    static string settingsPath = Application.persistentDataPath + "/settings.sts";
+    public static string settingsPath = Application.persistentDataPath + "/settings.sts";
 
     public static void SaveMap(MapGenerations map)
     {
