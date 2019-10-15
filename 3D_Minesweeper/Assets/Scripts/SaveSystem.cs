@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
     static string mapPath = Application.persistentDataPath + "/map.mms";
+    static string settingsPath = Application.persistentDataPath + "/settings.sts";
 
     public static void SaveMap(MapGenerations map)
     {
@@ -17,7 +18,7 @@ public static class SaveSystem
         formatter.Serialize(stream, data);
         stream.Close();
 
-        Debug.Log("File saved at: " + mapPath);
+        Debug.Log("Map file saved at: " + mapPath);
     }
 
     public static MapData LoadMap()
@@ -34,7 +35,39 @@ public static class SaveSystem
         }
         else
         {
-            Debug.LogError("Save file not found at: " + mapPath);
+            Debug.LogError("Map save file not found at: " + mapPath);
+            return null;
+        }
+    }
+
+    public static void SaveSettings(SettingsUiHelper settings)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(settingsPath, FileMode.Create);
+
+        SettingsData data = new SettingsData(settings);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+
+        Debug.Log("Settings file saved at: " + mapPath);
+    }
+
+    public static SettingsData LoadSettings()
+    {
+        if (File.Exists(settingsPath))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(settingsPath, FileMode.Open);
+            SettingsData data = formatter.Deserialize(stream) as SettingsData;
+
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Settings save file not found at: " + settingsPath);
             return null;
         }
     }

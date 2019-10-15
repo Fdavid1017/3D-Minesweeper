@@ -20,11 +20,32 @@ public class SettingsUiHelper : MonoBehaviour
 
     public static bool showTips = true;
 
-    sbyte graphicPosition = 2;
-    int resolutionIndex = 0;
-    Resolution[] resolutions;
+    [HideInInspector]
+    public sbyte graphicPosition = 2;
+    [HideInInspector]
+    public int resolutionIndex = 0;
+    [HideInInspector]
+    public Resolution[] resolutions;
     List<string> resolutionsString = new List<string>();
     bool saved = true;
+
+
+    private void Awake()
+    {
+        SettingsData data = SaveSystem.LoadSettings();
+        if (data != null)
+        {
+            Screen.SetResolution(data.resolutionWidth, data.resolutionHeight, data.fullScreen);
+            fullscreenButton.SetState(data.fullScreen);
+            QualitySettings.SetQualityLevel(data.graphicsQuality);
+            musicAudio.SetFloat("volume", data.musicVolume);
+            fxaudio.SetFloat("volume", data.sfxVolume);
+        }
+        else
+        {
+            Debug.LogError("Settings file not setted");
+        }
+    }
 
     private void Start()
     {
@@ -43,7 +64,11 @@ public class SettingsUiHelper : MonoBehaviour
         }
 
         ChangeGraphicsText(QualitySettings.names[QualitySettings.GetQualityLevel()]);
-        volumeSliderLabelText.text = "100";
+        float temp = 0f;
+        musicAudio.GetFloat("volume", out temp);
+        volumeSliderLabelText.text = Mathf.RoundToInt(temp).ToString();
+        fxaudio.GetFloat("volume", out temp);
+        fxVolumeSliderLabelText.text = Mathf.RoundToInt(temp).ToString();
         tipsButton.SetState(showTips);
     }
 
@@ -107,6 +132,9 @@ public class SettingsUiHelper : MonoBehaviour
 
         HideInfoPanel();
         mainMenuUi.SetActive(true);
+
+        SaveSystem.SaveSettings(this);
+
         this.gameObject.SetActive(false);
     }
 
