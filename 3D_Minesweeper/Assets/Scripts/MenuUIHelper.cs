@@ -27,6 +27,8 @@ public class MenuUIHelper : MonoBehaviour
     TextMeshProUGUI infoMore;
     [SerializeField]
     Button loadButton;
+    [SerializeField]
+    SceneLoader sceneLoader;
 
     int dif = 0;
     MapData mapData;
@@ -44,12 +46,12 @@ public class MenuUIHelper : MonoBehaviour
     public void PlayAgain()
     {
         MapGenerations.LoadMap = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        sceneLoader.LoadLevel("SceneManager.GetActiveScene().name");
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        sceneLoader.LoadLevel("MainMenu");
     }
 
     public void OpenDiffSelect()
@@ -62,7 +64,7 @@ public class MenuUIHelper : MonoBehaviour
     {
         MapGenerations.data = mapData;
         MapGenerations.LoadMap = true;
-        SceneManager.LoadScene("SampleScene");
+        sceneLoader.LoadLevel("SampleScene");
     }
 
     public void HighScores()
