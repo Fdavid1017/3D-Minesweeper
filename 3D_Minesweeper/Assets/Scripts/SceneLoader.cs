@@ -6,13 +6,9 @@ public class SceneLoader : MonoBehaviour
 {
     public GameObject loadingScreen;
 
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     public void LoadLevel(string sceneName)
     {
+        loadingScreen.SetActive(true);
         StartCoroutine(LoadAsynchronously(sceneName));
     }
 
@@ -20,11 +16,11 @@ public class SceneLoader : MonoBehaviour
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
+        Debug.Log("LOAD");
+        // While the asynchronous operation to load the new scene is not yet complete, continue waiting until it's done.
         while (!operation.isDone)
         {
-            loadingScreen.SetActive(true);
             yield return null;
         }
-        Destroy(gameObject);
     }
 }

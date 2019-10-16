@@ -97,7 +97,7 @@ LightmapSettings:
     m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -805,8 +805,8 @@ MonoBehaviour:
   fencePref2: {fileID: 2690474425447881702, guid: cc1ee661331ae144aabb2d23cf0827d2,
     type: 3}
   player: {fileID: 796422434}
-  water: {fileID: 0}
-  ground: {fileID: 0}
+  water: {fileID: 725408721}
+  ground: {fileID: 2096708491}
   diedUI: {fileID: 1928171434}
   smallRocks:
   - {fileID: 1578715142865732893, guid: 81b4bc36a3aaabe42a2f6cc95d8e76fd, type: 3}
@@ -895,7 +895,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517068271}
-  m_LocalRotation: {x: 0.11373688, y: -0.000000027406719, z: -0.000000015847105, w: 0.99351096}
+  m_LocalRotation: {x: 0.11373685, y: 0.0000000022022193, z: -0.000000019236728, w: 0.99351096}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1648,7 +1648,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &725408726
 MeshCollider:
@@ -2498,7 +2498,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935647894}
-  m_LocalRotation: {x: 0.03348895, y: 0.000000017330557, z: -5.807064e-10, w: 0.9994391}
+  m_LocalRotation: {x: 0.03348895, y: -0.000000017330557, z: 5.807093e-10, w: 0.9994391}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3728,6 +3728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 430705570}
+  sc: {fileID: 1593717696}
 --- !u!1 &1523408470
 GameObject:
   m_ObjectHideFlags: 0
@@ -5234,7 +5235,7 @@ Transform:
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2136271610
 GameObject:

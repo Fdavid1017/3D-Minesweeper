@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseUIHelper : MonoBehaviour
 {
     public MapGenerations map;
+    public SceneLoader sc;
 
     public void Resume()
     {
@@ -17,13 +18,13 @@ public class PauseUIHelper : MonoBehaviour
     {
         Time.timeScale = 1;
         MapGenerations.LoadMap = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        sc.LoadLevel("SampleScene");
     }
 
     public void MainMenu()
     {
         Time.timeScale = 1;
         SaveSystem.SaveMap(map);
-        SceneManager.LoadScene("MainMenu");
+        sc.LoadLevel("MainMenu");
     }
 }
