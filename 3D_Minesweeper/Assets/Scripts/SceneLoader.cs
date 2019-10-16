@@ -6,17 +6,14 @@ public class SceneLoader : MonoBehaviour
 {
     public GameObject loadingScreen;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void LoadLevel(string sceneName)
     {
-      /*  Debug.Log(sceneName);
-        if (sceneName != null && sceneName == "")
-        {*/
-            StartCoroutine(LoadAsynchronously(sceneName));
-      /*  }
-        else
-        {
-            Debug.LogError("Scene name must be assigned!!!");
-        }*/
+        StartCoroutine(LoadAsynchronously(sceneName));
     }
 
     IEnumerator LoadAsynchronously(string sceneName)
@@ -25,8 +22,9 @@ public class SceneLoader : MonoBehaviour
 
         while (!operation.isDone)
         {
-            // loadingScreen.SetActive(true);
+            loadingScreen.SetActive(true);
             yield return null;
         }
+        Destroy(gameObject);
     }
 }
