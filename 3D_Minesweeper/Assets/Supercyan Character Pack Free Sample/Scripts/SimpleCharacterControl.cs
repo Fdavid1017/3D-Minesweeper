@@ -7,8 +7,10 @@ public class SimpleCharacterControl : MonoBehaviour
     public bool isAlive = true;
 
     public GameObject waterSplash;
+    public AudioSource splashAudio;
 
     bool isAnimation = false;
+    bool triggered = false;
 
     private enum ControlMode
     {
@@ -212,8 +214,15 @@ public class SimpleCharacterControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Triggered by: " + other.name+" at: "+ other.transform.position);
-        GameObject splash = Instantiate(waterSplash,other.transform.position,Quaternion.identity);
-        Destroy(splash, 3f);
+        if (!triggered)
+        {
+            triggered = true;
+            Debug.Log("Triggered by: " + other.name + " at: " + other.transform.position);
+            Vector3 splashPos = transform.position;
+            splashPos.y = 0;
+            GameObject splash = Instantiate(waterSplash, splashPos, Quaternion.identity);
+            splashAudio.Play();
+            Destroy(splash, 3f);
+        }
     }
 }
