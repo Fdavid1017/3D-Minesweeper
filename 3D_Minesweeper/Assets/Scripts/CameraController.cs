@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float time = UnityEngine.Random.Range(0, 5);
+        float time = UnityEngine.Random.Range(0, 20);
         Invoke("playBirdSounds", time);
     }
 
@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
             audio.Play();
         }
 
-        float time = UnityEngine.Random.Range(0, 5);
+        float time = UnityEngine.Random.Range(0, 20);
         Invoke("playBirdSounds", time);
     }
 }

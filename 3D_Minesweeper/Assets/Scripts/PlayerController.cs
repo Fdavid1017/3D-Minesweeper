@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip dirt;
     public AudioClip stone;
     public AudioSource audio;
+    public AudioSource revealAudio;
 
     int flagCount;
     MapGenerations mapGenerator;
@@ -120,6 +121,11 @@ public class PlayerController : MonoBehaviour
         if (MapGenerations.revealedTilesCount < 1)
         {
             mapGenerator.GenerateBombs(x, z);
+        }
+
+        if (!revealAudio.isPlaying)
+        {
+            revealAudio.Play();
         }
 
         if (mapGenerator.tiles[x, z].GetComponent<Tile>().NearbyCount == 0)
