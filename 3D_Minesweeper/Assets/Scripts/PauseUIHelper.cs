@@ -10,12 +10,14 @@ public class PauseUIHelper : MonoBehaviour
 
     public void Resume()
     {
+        Cursor.visible = false;
         Time.timeScale = 1;
         gameObject.SetActive(false);
     }
 
     public void Restart()
     {
+        Cursor.visible = false;
         Time.timeScale = 1;
         MapGenerations.LoadMap = false;
         sc.LoadLevel("SampleScene");
@@ -23,6 +25,7 @@ public class PauseUIHelper : MonoBehaviour
 
     public void MainMenu()
     {
+        Cursor.visible = true;
         Time.timeScale = 1;
         SaveSystem.SaveMap(map);
         sc.LoadLevel("MainMenu");

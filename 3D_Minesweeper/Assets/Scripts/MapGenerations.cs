@@ -286,6 +286,7 @@ public class MapGenerations : MonoBehaviour
         revealedTilesCount += increaseBy;
         if (revealedTilesCount == (tileCount - bombCount))
         {
+            Cursor.visible = true;
             winUI.SetActive(true);
             GameUIHelper.StopTime = true;
         }

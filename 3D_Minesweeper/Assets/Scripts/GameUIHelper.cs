@@ -28,6 +28,7 @@ public class GameUIHelper : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         playTime = 0;
         StopTime = false;
         Invoke("IncreasePlayTime", 1f);
@@ -46,6 +47,7 @@ public class GameUIHelper : MonoBehaviour
             }
             else
             {
+                Cursor.visible = true;
                 pauseUI.SetActive(true);
                 Time.timeScale = 0;
             }
