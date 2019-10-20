@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
 
     public void StepSound()
     {
-        if (transform.position != previousLocationRAW)
+        if (transform.position != previousLocationRAW && gameObject.GetComponent<SimpleCharacterControl>().isAlive)
         {
 
             int x = Mathf.RoundToInt(transform.position.x);
