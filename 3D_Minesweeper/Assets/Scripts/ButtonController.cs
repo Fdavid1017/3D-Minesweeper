@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
-    public AudioSource audio;
+    public Animator anim;
 
-   public void OnHoverEnter()
+    public void OnHoverEnter()
     {
-        audio.Play();
+        anim.SetBool("Hovering", true);
+    }
+
+    public void OnHoverExit()
+    {
+        anim.SetBool("Hovering", false);
     }
 }
