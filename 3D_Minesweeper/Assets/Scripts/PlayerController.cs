@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
                     {
                         PlaceFlag(mapGenerator.tiles[x, z].transform, true, x, z);
                     }
-                    else
+                    else if (mapGenerator.tiles[x, z].GetComponent<Tile>().isFlagged)
                     {
                         PlaceFlag(mapGenerator.tiles[x, z].transform, false, x, z);
                     }

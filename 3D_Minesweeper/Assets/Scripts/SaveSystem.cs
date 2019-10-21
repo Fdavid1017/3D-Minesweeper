@@ -42,6 +42,8 @@ public static class SaveSystem
 
     public static void SaveSettings(SettingsUiHelper settings)
     {
+        Debug.Log(settingsPath);
+
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(settingsPath, FileMode.Create);
 
